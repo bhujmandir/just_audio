@@ -666,7 +666,8 @@ class AudioPlayer {
     if (playing && processingState == ProcessingState.ready) {
       final result = playbackEvent.updatePosition +
           (DateTime.now().difference(playbackEvent.updateTime)) * speed;
-      return playbackEvent.duration == null || result <= playbackEvent.duration!
+      // tries fix suggested on: https://github.com/ryanheise/just_audio/issues/1435
+      return playbackEvent.duration == null || playbackEvent.duration! == Duration.zero || result <= playbackEvent.duration!
           ? result
           : playbackEvent.duration!;
     } else {
