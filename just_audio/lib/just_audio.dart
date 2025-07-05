@@ -1008,14 +1008,7 @@ class AudioPlayer {
             initialPosition: initialSeekValues?.position,
             initialIndex: initialSeekValues?.index,
           ))
-          .then((response) => response.duration)
-          .catchError(() {
-            return platform.load(LoadRequest(
-              audioSourceMessage: source._toMessage(),
-              initialPosition: initialSeekValues?.position,
-              initialIndex: initialSeekValues?.index,
-            )).then((response) => response.duration);
-          });
+          .then((response) => response.duration);
       final duration = await _loadFuture;
       checkInterruption();
       if (platform != _platformValue) {
